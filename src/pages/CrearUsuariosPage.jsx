@@ -29,7 +29,7 @@ export default function CrearUsuariosPage({ user }) {
     setSuccess('');
 
     try {
-      await api.post('/usuarios/', formData);
+      await api.post('/usuarios', formData);
       setSuccess('Usuario creado exitosamente.');
       setFormData({
         nombre: '',

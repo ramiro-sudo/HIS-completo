@@ -34,7 +34,7 @@ const salidaInitial = () => ({
   fecha_vencimiento: '',
 });
 
-const isAdminRole = (rol) => ['admin', 'super_admin', 'empleado'].includes(rol);
+const isAdminRole = (rol) => ['admin', 'super_admin','empleado'].includes(rol);
 
 const normalizeCantidad = (value) => (value ? Number(value) : 0);
 
@@ -105,7 +105,7 @@ export default function MovimientosPage({ user }) {
 
   const fetchInsumos = async () => {
     try {
-      const { data } = await api.get('/insumos/?limit=1000');
+      const { data } = await api.get('/insumos?limit=1000');
       setInsumos(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Error al cargar insumos:', error);
@@ -154,7 +154,7 @@ export default function MovimientosPage({ user }) {
         payload.remitente_destinatario = proveedorLimpio;
       }
 
-      await api.post('/entradas/', payload);
+      await api.post('/entradas', payload);
 
       setFeedback({
         type: 'success',
@@ -195,8 +195,8 @@ export default function MovimientosPage({ user }) {
         numero_lote: loteSeleccionado?.numero_lote || '',
         fecha_vencimiento: loteSeleccionado?.fecha_vencimiento
           ? new Date(loteSeleccionado.fecha_vencimiento)
-            .toISOString()
-            .split('T')[0]
+              .toISOString()
+              .split('T')[0]
           : '',
         precio_unitario: loteSeleccionado?.precio_unitario || prev.precio_unitario,
       }));
@@ -234,21 +234,21 @@ export default function MovimientosPage({ user }) {
       return;
     }
 
-    try {
-      const payload = {
-        ...salidaForm,
-        cantidad: Number(salidaForm.cantidad),
-        precio_unitario: Number(salidaForm.precio_unitario) || 0,
-        insumo_id: Number(salidaForm.insumo_id),
-        usuario_id: currentUserId,
-        numero_lote: fefoInfo.numero_lote,
-      };
-      if (salidaForm.destinatario) {
-        payload.destinatario = salidaForm.destinatario;
-        payload.remitente_destinatario = salidaForm.destinatario;
-      }
+  try {
+    const payload = {
+      ...salidaForm,
+      cantidad: Number(salidaForm.cantidad),
+      precio_unitario: Number(salidaForm.precio_unitario) || 0,
+      insumo_id: Number(salidaForm.insumo_id),
+      usuario_id: currentUserId,
+      numero_lote: fefoInfo.numero_lote,
+    };
+    if (salidaForm.destinatario) {
+      payload.destinatario = salidaForm.destinatario;
+      payload.remitente_destinatario = salidaForm.destinatario;
+    }
 
-      await api.post('/salidas/', payload);
+    await api.post('/salidas', payload);
 
       setFeedback({
         type: 'success',
@@ -322,10 +322,11 @@ export default function MovimientosPage({ user }) {
               <button
                 type="button"
                 onClick={() => setActiveTab('entrada')}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${activeTab === 'entrada'
-                  ? 'bg-white text-sky-600 shadow'
-                  : 'text-slate-500 hover:text-slate-700'
-                  }`}
+                className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  activeTab === 'entrada'
+                    ? 'bg-white text-sky-600 shadow'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
               >
                 <ArrowDownToLine size={16} />
                 Entrada
@@ -333,10 +334,11 @@ export default function MovimientosPage({ user }) {
               <button
                 type="button"
                 onClick={() => setActiveTab('salida')}
-                className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${activeTab === 'salida'
-                  ? 'bg-white text-sky-600 shadow'
-                  : 'text-slate-500 hover:text-slate-700'
-                  }`}
+                className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  activeTab === 'salida'
+                    ? 'bg-white text-sky-600 shadow'
+                    : 'text-slate-500 hover:text-slate-700'
+                }`}
               >
                 <ArrowUpFromLine size={16} />
                 Salida
@@ -345,10 +347,11 @@ export default function MovimientosPage({ user }) {
 
             {feedback.message && (
               <div
-                className={`mt-6 rounded-2xl border p-4 text-sm ${feedback.type === 'success'
-                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                  : 'border-red-200 bg-red-50 text-red-700'
-                  }`}
+                className={`mt-6 rounded-2xl border p-4 text-sm ${
+                  feedback.type === 'success'
+                    ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                    : 'border-red-200 bg-red-50 text-red-700'
+                }`}
               >
                 {feedback.message}
               </div>
@@ -586,8 +589,8 @@ export default function MovimientosPage({ user }) {
                             </span>{' '}
                             {fefoInfo.fecha_vencimiento
                               ? new Date(fefoInfo.fecha_vencimiento).toLocaleDateString(
-                                'es-ES'
-                              )
+                                  'es-ES'
+                                )
                               : 'Sin fecha'}
                           </li>
                           <li>

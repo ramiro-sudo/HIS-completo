@@ -12,7 +12,7 @@ export default function AlertasPage({ user }) {
   useEffect(() => {
     const fetchAlertas = async () => {
       try {
-        const res = await api.get('/alertas/?limit=1000');
+        const res = await api.get('/alertas?limit=1000');
         setAlertas(res.data);
       } catch (error) {
         console.error('Error al cargar alertas:', error);

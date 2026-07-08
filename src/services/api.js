@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getToken, removeToken } from '../utils/Auth.js';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: 'http://localhost:8000',
   timeout: 10000,
 });
 

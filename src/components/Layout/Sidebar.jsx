@@ -72,7 +72,7 @@ export function Sidebar({ user }) {
         className={`border-b border-slate-100 bg-gradient-to-br ${theme.accentBar} px-6 py-8`}
       >
         <p className="text-xs font-semibold uppercase tracking-[0.32em] text-sky-600">
-          SICODAR
+          HIS-Bodega
         </p>
         <h1 className="mt-2 text-2xl font-bold text-slate-900">Panel Operativo</h1>
         <p className="mt-6 text-sm font-medium text-slate-500">
@@ -85,7 +85,7 @@ export function Sidebar({ user }) {
         </span>
       </div>
 
-      <nav className="flex-1 space-y-1 px-4 py-6">
+  <nav className="flex-1 space-y-1 px-4 py-6">
         {navigationItems
           .filter(({ roles }) => !roles || roles.includes(rol))
           .map(({ to, label, icon: Icon }) => (
@@ -93,9 +93,10 @@ export function Sidebar({ user }) {
               key={to}
               to={to}
               className={({ isActive }) =>
-                `${baseClasses} ${isActive
-                  ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-200'
-                  : 'text-slate-600 hover:bg-sky-50 hover:text-sky-600'
+                `${baseClasses} ${
+                  isActive
+                    ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-200'
+                    : 'text-slate-600 hover:bg-sky-50 hover:text-sky-600'
                 }`
               }
             >

@@ -22,7 +22,7 @@ app = FastAPI(title="HIS-Bodega", description="Sistema de Gestión de Inventario
 # Habilitar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://sicodar.hro.gob.gt"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -63,7 +63,7 @@ export default function InsumosPage({ user }) {
     const loadData = async () => {
       try {
         const [insumosRes, especialidadesRes] = await Promise.all([
-          api.get('/insumos/?limit=1000'),
+          api.get('/insumos?limit=1000'),
           api.get('/especialidades/'),
         ])
         setInsumos(Array.isArray(insumosRes.data) ? insumosRes.data : [])
@@ -75,16 +75,16 @@ export default function InsumosPage({ user }) {
           catalog.length
             ? catalog
             : [
-              { id: 'Cirugia', nombre: 'Cirugía' },
-              { id: 'Laboratorio', nombre: 'Laboratorio' },
-              { id: 'Urgencias', nombre: 'Urgencias' },
-              { id: 'Medicina Interna', nombre: 'Medicina Interna' },
-              { id: 'Pediatria', nombre: 'Pediatría' },
-              { id: 'Ginecologia', nombre: 'Ginecología' },
-              { id: 'Farmacia', nombre: 'Farmacia' },
-              { id: 'Esteril', nombre: 'Estéril' },
-              { id: 'General', nombre: 'General' },
-            ]
+                { id: 'Cirugia', nombre: 'Cirugía' },
+                { id: 'Laboratorio', nombre: 'Laboratorio' },
+                { id: 'Urgencias', nombre: 'Urgencias' },
+                { id: 'Medicina Interna', nombre: 'Medicina Interna' },
+                { id: 'Pediatria', nombre: 'Pediatría' },
+                { id: 'Ginecologia', nombre: 'Ginecología' },
+                { id: 'Farmacia', nombre: 'Farmacia' },
+                { id: 'Esteril', nombre: 'Estéril' },
+                { id: 'General', nombre: 'General' },
+              ]
         )
       } catch (err) {
         console.error('Error al cargar insumos/especialidades', err)
@@ -123,12 +123,12 @@ export default function InsumosPage({ user }) {
         await api.put(`/insumos/${editingInsumo.id}`, payload)
         setSuccess('Insumo actualizado correctamente.')
       } else {
-        await api.post('/insumos/', payload)
+        await api.post('/insumos', payload)
         setSuccess('Insumo creado correctamente.')
       }
       resetForm()
       setShowForm(false)
-      const { data } = await api.get('/insumos/?limit=1000')
+      const { data } = await api.get('/insumos?limit=1000')
       setInsumos(Array.isArray(data) ? data : [])
     } catch (err) {
       const detail = err.response?.data?.detail
@@ -346,10 +346,11 @@ export default function InsumosPage({ user }) {
                         </td>
                         <td className="px-4 py-3 text-right text-slate-600">
                           <span
-                            className={`inline-flex min-w-[64px] justify-center rounded-full px-3 py-1 text-xs font-semibold ${(insumo.stock_actual || 0) >= (insumo.stock_minimo || 0)
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                              : 'bg-red-50 text-red-600 border border-red-200'
-                              }`}
+                            className={`inline-flex min-w-[64px] justify-center rounded-full px-3 py-1 text-xs font-semibold ${
+                              (insumo.stock_actual || 0) >= (insumo.stock_minimo || 0)
+                                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                : 'bg-red-50 text-red-600 border border-red-200'
+                            }`}
                           >
                             {numberFormatter.format(insumo.stock_actual || 0)}
                           </span>

@@ -148,8 +148,3 @@ CREATE TABLE IF NOT EXISTS requisicion_detalles (
 -- Usuario de ejemplo (reemplaza password_hash con el generado por passlib)
 -- INSERT INTO usuarios (nombre, email, password_hash, rol)
 -- VALUES ('Administrador', 'admin@ejemplo.com', '<hash_generado>', 'admin');
-
--- Permisos para el usuario de aplicación del backend.
--- Si la base ya existía antes de aplicar este script, ejecuta el GRANT manualmente una vez.
-GRANT ALL PRIVILEGES ON his_bodega.* TO 'bodega_admin'@'%';
-FLUSH PRIVILEGES;

@@ -5,7 +5,6 @@ import { Header } from "../components/Layout/Header";
 import { Card } from "../components/UI/Card";
 import { Button } from "../components/UI/Button";
 import { Plus, Eye, Trash2, X } from "lucide-react";
-import api from "../services/api";
 
 const PAGE_SIZE = 15;
 
@@ -30,8 +29,12 @@ export default function FacturasPage({ user }) {
   useEffect(() => {
     const fetchFacturas = async () => {
       try {
-        const { data } = await api.get('/entradas/');
-
+        const response = await fetch("http://localhost:8000/entradas/", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const data = await response.json();
         const registros = Array.isArray(data) ? data : [];
         registros.sort((a, b) => {
           const fechaA = a.fecha ? new Date(a.fecha) : new Date(0);
@@ -66,8 +69,13 @@ export default function FacturasPage({ user }) {
   const handleDelete = async (id) => {
     if (!window.confirm("Eliminar esta entrada?")) return;
     try {
-      await api.delete(`/entradas/${id}`);
-
+      const response = await fetch(`http://localhost:8000/entradas/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (!response.ok) throw new Error("Error al eliminar la factura");
       setFacturas((prev) => prev.filter((factura) => factura.id !== id));
     } catch (err) {
       console.error("Error al eliminar factura", err);

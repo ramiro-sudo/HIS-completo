@@ -97,7 +97,7 @@ export default function RequisicionesPage({ user }) {
       setLoading(true);
       const errores = [];
       try {
-        const { data } = await api.get('/insumos/?limit=1000');
+        const { data } = await api.get('/insumos?limit=1000');
         setInsumos(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error cargando insumos', error);
@@ -318,10 +318,11 @@ export default function RequisicionesPage({ user }) {
 
           {feedback && (
             <div
-              className={`rounded-2xl border px-4 py-3 text-sm ${feedback.type === 'error'
+              className={`rounded-2xl border px-4 py-3 text-sm ${
+                feedback.type === 'error'
                   ? 'border-rose-200 bg-rose-50 text-rose-700'
                   : 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                }`}
+              }`}
             >
               {feedback.message}
             </div>
@@ -640,10 +641,11 @@ export default function RequisicionesPage({ user }) {
                       key={req.id}
                       type="button"
                       onClick={() => setSelectedRequisicion(req)}
-                      className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${selectedRequisicion?.id === req.id
+                      className={`w-full rounded-2xl border px-4 py-3 text-left text-sm transition ${
+                        selectedRequisicion?.id === req.id
                           ? 'border-sky-200 bg-sky-50 text-sky-700'
                           : 'border-slate-200 bg-white text-slate-600 hover:border-sky-200'
-                        }`}
+                      }`}
                     >
                       <p className="font-semibold text-slate-900">
                         #{req.numero} · {req.servicio}

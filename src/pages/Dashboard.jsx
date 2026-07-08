@@ -67,8 +67,8 @@ export default function Dashboard({ user }) {
     const fetchDashboardData = async () => {
       try {
         const [insumosRes, alertasRes] = await Promise.all([
-          api.get("/insumos/?limit=1000"),
-          api.get("/alertas/?limit=1000"),
+          api.get("/insumos?limit=1000"),
+          api.get("/alertas?limit=1000"),
         ]);
 
         const insumos = Array.isArray(insumosRes.data) ? insumosRes.data : [];

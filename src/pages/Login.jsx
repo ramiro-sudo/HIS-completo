@@ -49,9 +49,9 @@ export default function Login({ onLogin }) {
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-blue-50 px-4 py-16">
       <Card className="w-full max-w-md rounded-3xl border border-white/60 bg-white/90 p-10 shadow-[0_20px_45px_rgba(15,23,42,0.08)] backdrop-blur">
         <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold text-slate-900">SICODAR</h1>
+          <h1 className="text-2xl font-bold text-slate-900">HIS-Bodega</h1>
           <p className="mt-1 text-sm font-medium text-slate-500">
-            Sistema de control de almacenes regional
+            Sistema de Gestion de Inventario
           </p>
         </div>
 
